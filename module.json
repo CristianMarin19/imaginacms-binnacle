@@ -1,0 +1,14 @@
+{
+    "name": "Ibinnacle",
+    "alias": "ibinnacle",
+    "description": "",
+    "keywords": [],
+    "priority": 1,
+    "providers": [
+        "Modules\\Ibinnacle\\Providers\\IbinnacleServiceProvider",
+        "Modules\\Ibinnacle\\Providers\\RouteServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
