@@ -11,69 +11,71 @@ use Modules\Ibinnacle\Listeners\RegisterIbinnacleSidebar;
 
 class IbinnacleServiceProvider extends ServiceProvider
 {
-  use CanPublishConfiguration;
-  /**
-   * Indicates if loading of the provider is deferred.
-   *
-   * @var bool
-   */
-  protected $defer = false;
+    use CanPublishConfiguration;
+    /**
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
+     */
+    protected $defer = false;
 
-  /**
-   * Register the service provider.
-   *
-   * @return void
-   */
-  public function register()
-  {
-    $this->registerBindings();
-    $this->app['events']->listen(BuildingSidebar::class, RegisterIbinnacleSidebar::class);
+    /**
+     * Register the service provider.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->registerBindings();
+        $this->app['events']->listen(BuildingSidebar::class, RegisterIbinnacleSidebar::class);
 
-    $this->app['events']->listen(LoadingBackendTranslations::class, function (LoadingBackendTranslations $event) {
-      $event->load('binnacles', Arr::dot(trans('ibinnacle::binnacles')));
-      // append translations
-
-    });
+        $this->app['events']->listen(LoadingBackendTranslations::class, function (LoadingBackendTranslations $event) {
+            // append translations
+        });
 
 
-  }
+    }
 
-  public function boot()
-  {
-    $this->publishConfig('ibinnacle', 'permissions');
-    $this->publishConfig('ibinnacle', 'config');
-    $this->publishConfig('ibinnacle', 'crud-fields');
+    public function boot()
+    {
+       
+        $this->publishConfig('ibinnacle', 'config');
+        $this->publishConfig('ibinnacle', 'crud-fields');
 
-    $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
-  }
+        $this->mergeConfigFrom($this->getModuleConfigFilePath('ibinnacle', 'settings'), "asgard.ibinnacle.settings");
+        $this->mergeConfigFrom($this->getModuleConfigFilePath('ibinnacle', 'settings-fields'), "asgard.ibinnacle.settings-fields");
+        $this->mergeConfigFrom($this->getModuleConfigFilePath('ibinnacle', 'permissions'), "asgard.ibinnacle.permissions");
 
-  /**
-   * Get the services provided by the provider.
-   *
-   * @return array
-   */
-  public function provides()
-  {
-    return array();
-  }
+        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+    }
 
-  private function registerBindings()
-  {
-    $this->app->bind(
-      'Modules\Ibinnacle\Repositories\BinnacleRepository',
-      function () {
-        $repository = new \Modules\Ibinnacle\Repositories\Eloquent\EloquentBinnacleRepository(new \Modules\Ibinnacle\Entities\Binnacle());
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return array();
+    }
 
-        if (! config('app.cache')) {
-          return $repository;
-        }
+    private function registerBindings()
+    {
+        $this->app->bind(
+            'Modules\Ibinnacle\Repositories\BinnacleRepository',
+            function () {
+                $repository = new \Modules\Ibinnacle\Repositories\Eloquent\EloquentBinnacleRepository(new \Modules\Ibinnacle\Entities\Binnacle());
 
-        return new \Modules\Ibinnacle\Repositories\Cache\CacheBinnacleDecorator($repository);
-      }
-    );
+                if (! config('app.cache')) {
+                    return $repository;
+                }
+
+                return new \Modules\Ibinnacle\Repositories\Cache\CacheBinnacleDecorator($repository);
+            }
+        );
 // add bindings
 
-  }
+    }
 
 
 }

@@ -1,11 +1,13 @@
 {
     "name": "Ibinnacle",
     "alias": "ibinnacle",
-    "description": "",
+    "version": "1.0.0",
+	"description": "",
     "keywords": [],
     "priority": 1,
     "providers": [
         "Modules\\Ibinnacle\\Providers\\IbinnacleServiceProvider",
+        "Modules\\Ibinnacle\\Providers\\EventServiceProvider",
         "Modules\\Ibinnacle\\Providers\\RouteServiceProvider"
     ],
     "aliases": {},
