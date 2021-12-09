@@ -1,5 +1,5 @@
 {
-    "name": "vendor/ibinnacle",
+    "name": "imagina/ibinnacle-module",
     "description": "",
     "type": "asgard-module",
     "license": "MIT",
@@ -18,12 +18,12 @@
             "Modules\\": "Modules/"
         }
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true,
     "authors": [
         {
-            "name": "Nicolas Widart",
-            "email": "n.widart@gmail.com"
+            "name": "Imagina Colombia",
+            "email": "proyectos@imaginacolombia.com"
         }
     ],
     "extra": {
@@ -32,6 +32,9 @@
             "aliases": {
 
             }
+        },
+        "branch-alias": {
+            "dev-v8.x": "8.0.x-dev"
         }
     },
     "autoload": {
