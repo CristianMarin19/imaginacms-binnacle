@@ -1,10 +1,10 @@
 {
-    "name": "nwidart/ibinnacle",
+    "name": "imagina/ibinnacle-module",
     "description": "",
     "authors": [
         {
-            "name": "Nicolas Widart",
-            "email": "n.widart@gmail.com"
+            "name": "Imagina Colombia",
+            "email": "proyectos@imaginacolombia.com"
         }
     ],
     "extra": {
