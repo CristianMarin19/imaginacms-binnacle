@@ -46,7 +46,7 @@ class IbinnacleServiceProvider extends ServiceProvider
         $this->mergeConfigFrom($this->getModuleConfigFilePath('ibinnacle', 'settings-fields'), "asgard.ibinnacle.settings-fields");
         $this->mergeConfigFrom($this->getModuleConfigFilePath('ibinnacle', 'permissions'), "asgard.ibinnacle.permissions");
 
-        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+        //$this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
     }
 
     /**
