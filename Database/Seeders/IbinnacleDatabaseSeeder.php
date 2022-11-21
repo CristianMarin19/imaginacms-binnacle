@@ -16,6 +16,7 @@ class IbinnacleDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
+        $this->call(IbinnacleModuleTableSeeder::class);
         // $this->call("OthersTableSeeder");
     }
 }
