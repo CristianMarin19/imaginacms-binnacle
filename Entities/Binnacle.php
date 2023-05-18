@@ -7,18 +7,19 @@ use Modules\Core\Icrud\Entities\CrudModel;
 
 class Binnacle extends CrudModel
 {
-    use Translatable;
+  use Translatable;
 
-    protected $table = 'ibinnacle__binnacles';
-    public $transformer = 'Modules\Ibinnacle\Transformers\BinnacleTransformer';
-    public $requestValidation = [
-        'create' => 'Modules\Ibinnacle\Http\Requests\CreateBinnacleRequest',
-        'update' => 'Modules\Ibinnacle\Http\Requests\UpdateBinnacleRequest',
-      ];
-    public $translatedAttributes = [];
-    protected $fillable = [
-      'description',
-      'binnacle_id',
-      'binnacle_type',
-    ];
+  protected $table = 'ibinnacle__binnacles';
+  public $transformer = 'Modules\Ibinnacle\Transformers\BinnacleTransformer';
+  public $repository = 'Modules\Ibinnacle\Repositories\BinnacleRepository';
+  public $requestValidation = [
+    'create' => 'Modules\Ibinnacle\Http\Requests\CreateBinnacleRequest',
+    'update' => 'Modules\Ibinnacle\Http\Requests\UpdateBinnacleRequest',
+  ];
+  public $translatedAttributes = [];
+  protected $fillable = [
+    'description',
+    'binnacle_id',
+    'binnacle_type',
+  ];
 }
