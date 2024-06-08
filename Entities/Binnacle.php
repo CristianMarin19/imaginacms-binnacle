@@ -2,29 +2,29 @@
 
 namespace Modules\Ibinnacle\Entities;
 
-use Illuminate\Database\Eloquent\Model;
-use Modules\Core\Traits\NamespacedEntity;
-use Illuminate\Support\Str;
+use Astrotomic\Translatable\Translatable;
+use Modules\Core\Icrud\Entities\CrudModel;
 
-class Binnacle extends Model
+class Binnacle extends CrudModel
 {
-  use NamespacedEntity;
+    use Translatable;
 
-  protected $table = 'ibinnacle__binnacles';
-  protected static $entityNamespace = 'asgardcms/ibinnacleBinnacle';
+    protected $table = 'ibinnacle__binnacles';
 
-  protected $fillable = [
-    'created_by_id',
-    'description',
-    'binnacle_id',
-    'binnacle_type',
-  ];
-  public function getOptioqnsAttribute($value)
-  {
-    try {
-      return json_decode(json_decode($value));
-    } catch (\Exception $e) {
-      return json_decode($value);
-    }
-  }
+    public $transformer = 'Modules\Ibinnacle\Transformers\BinnacleTransformer';
+
+    public $repository = 'Modules\Ibinnacle\Repositories\BinnacleRepository';
+
+    public $requestValidation = [
+        'create' => 'Modules\Ibinnacle\Http\Requests\CreateBinnacleRequest',
+        'update' => 'Modules\Ibinnacle\Http\Requests\UpdateBinnacleRequest',
+    ];
+
+    public $translatedAttributes = [];
+
+    protected $fillable = [
+        'description',
+        'binnacle_id',
+        'binnacle_type',
+    ];
 }
